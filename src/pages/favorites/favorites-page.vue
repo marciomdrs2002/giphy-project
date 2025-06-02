@@ -1,11 +1,12 @@
 <template>
   <q-page padding>
-    <div class="row items-center justify-between q-mb-md">
-      <div class="text-h4">Meus Favoritos</div>
-      <q-chip v-if="favoritesStore.favoritesCount > 0" color="primary" text-color="white">
-        {{ favoritesStore.favoritesCount }} GIFs
-      </q-chip>
-    </div>
+    <page-header title="Meus Favoritos">
+      <template #actions>
+        <q-chip v-if="favoritesStore.favoritesCount > 0" color="primary" text-color="white">
+          {{ favoritesStore.favoritesCount }} GIFs
+        </q-chip>
+      </template>
+    </page-header>
 
     <!-- Estado vazio -->
     <div v-if="favoritesStore.items.length === 0" class="text-center q-py-xl">
@@ -53,6 +54,7 @@
 import { useQuasar } from 'quasar'
 import { useFavoritesStore } from 'src/stores/favorites-store'
 import GifCard from 'src/components/common/gif-card.vue'
+import PageHeader from 'src/components/common/page-header.vue'
 
 defineOptions({
   name: 'FavoritesPage',
@@ -61,7 +63,6 @@ defineOptions({
 const $q = useQuasar()
 const favoritesStore = useFavoritesStore()
 
-// Confirma a limpeza de todos os favoritos
 const confirmClearAll = () => {
   $q.dialog({
     title: 'Limpar todos os favoritos',
@@ -80,13 +81,9 @@ const confirmClearAll = () => {
   })
 }
 
-const onFavoriteToggled = () => {
-  // Não precisa fazer nada aqui pois o GifCard já lida com isso
-}
+const onFavoriteToggled = () => {}
 
-const onRemoveRequested = () => {
-  // Não precisa fazer nada aqui pois o GifCard já lida com isso
-}
+const onRemoveRequested = () => {}
 </script>
 
 <style lang="scss" scoped>

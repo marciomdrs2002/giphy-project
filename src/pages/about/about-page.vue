@@ -78,7 +78,6 @@
 </template>
 
 <script setup>
-// Componente não requer estado ou lógica adicional
 </script>
 
 <style lang="scss" scoped>

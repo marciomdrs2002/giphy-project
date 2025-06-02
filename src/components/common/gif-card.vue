@@ -7,7 +7,6 @@
     </q-card-section>
 
     <q-card-actions align="right">
-      <!-- Botão de favorito -->
       <q-btn
         flat
         round
@@ -20,7 +19,6 @@
         </q-tooltip>
       </q-btn>
 
-      <!-- Botão de compartilhar -->
       <q-btn flat round color="grey" icon="share" @click="handleShare">
         <q-tooltip>Compartilhar</q-tooltip>
       </q-btn>
@@ -33,7 +31,6 @@ import { computed } from 'vue'
 import { useQuasar } from 'quasar'
 import { useFavoritesStore } from 'src/stores/favorites-store'
 
-// Props
 const props = defineProps({
   gif: {
     type: Object,
@@ -45,16 +42,13 @@ const props = defineProps({
   },
 })
 
-// Emits
 const emit = defineEmits(['favorite-toggled', 'remove-requested'])
 
 const $q = useQuasar()
 const favoritesStore = useFavoritesStore()
 
-// Computed
 const isFavorite = computed(() => favoritesStore.isFavorite(props.gif.id))
 
-// Methods
 const handleToggleFavorite = () => {
   favoritesStore.toggleFavorite(props.gif)
   const message = favoritesStore.isFavorite(props.gif.id)
@@ -69,7 +63,6 @@ const handleToggleFavorite = () => {
     icon,
   })
 
-  // Emite evento para o componente pai
   emit('favorite-toggled', { gif: props.gif, isFavorite: favoritesStore.isFavorite(props.gif.id) })
 }
 

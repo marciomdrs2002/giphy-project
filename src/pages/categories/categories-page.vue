@@ -1,8 +1,14 @@
 <template>
   <q-page padding>
-    <!-- Lista de Categorias -->
+    <page-header title="Categorias">
+      <template #actions>
+        <q-chip v-if="selectedCategory" color="primary" text-color="white">
+          {{ pagination.total_count }} GIFs encontrados
+        </q-chip>
+      </template>
+    </page-header>
+
     <div class="categories-section q-mb-lg">
-      <div class="text-h5 q-mb-md">Categorias</div>
       <div class="row q-col-gutter-sm">
         <div v-for="category in categories" :key="category.name" class="col-auto">
           <q-chip
@@ -17,25 +23,21 @@
       </div>
     </div>
 
-    <!-- Título da Categoria Selecionada -->
     <div v-if="selectedCategory" class="text-h6 q-mb-md">
       GIFs da categoria: {{ selectedCategory }}
     </div>
 
-    <!-- Grid de GIFs -->
     <div class="row q-col-gutter-md">
       <div v-for="gif in items" :key="gif.id" class="col-12 col-sm-6 col-md-4 col-lg-3">
         <gif-card :gif="gif" />
       </div>
     </div>
 
-    <!-- Mensagem quando não há categoria selecionada -->
     <div v-if="!selectedCategory" class="text-center q-mt-xl">
       <q-icon name="category" size="4rem" color="grey-5" />
       <div class="text-h6 text-grey-7 q-mt-md">Selecione uma categoria para ver os GIFs</div>
     </div>
 
-    <!-- Paginação -->
     <div v-if="selectedCategory && totalPages > 1" class="row justify-center q-mt-lg">
       <q-pagination
         v-model="currentPage"
@@ -48,7 +50,6 @@
       />
     </div>
 
-    <!-- Contador de Resultados -->
     <div v-if="selectedCategory && items.length > 0" class="row justify-center q-mt-md">
       <div class="text-caption text-grey-6">
         Página {{ currentPage }} de {{ totalPages }} ({{ pagination.total_count }}
@@ -63,11 +64,11 @@ import { ref, onMounted, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import { GiphyApi } from 'src/api/giphy'
 import GifCard from 'src/components/common/gif-card.vue'
+import PageHeader from 'src/components/common/page-header.vue'
 
 const $q = useQuasar()
 const giphyApi = new GiphyApi()
 
-// Estado local
 const items = ref([])
 const categories = ref([])
 const selectedCategory = ref('')
@@ -79,17 +80,14 @@ const pagination = ref({
   offset: 0,
 })
 
-// Computed
 const totalPages = computed(() => {
   return Math.ceil(pagination.value.total_count / pageSize.value)
 })
 
-// Lifecycle hooks
 onMounted(async () => {
   await fetchCategories()
 })
 
-// Métodos
 const fetchCategories = async () => {
   try {
     $q.loading.show({

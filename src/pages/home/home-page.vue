@@ -1,5 +1,13 @@
 <template>
   <q-page padding>
+    <page-header title="Explorar GIFs">
+      <template #actions>
+        <q-chip v-if="items.length > 0" color="primary" text-color="white">
+          {{ pagination.total_count }} GIFs encontrados
+        </q-chip>
+      </template>
+    </page-header>
+
     <search-bar
       v-model="searchQuery"
       label="Pesquisar GIFs"
@@ -40,11 +48,11 @@ import { useQuasar } from 'quasar'
 import { GiphyApi } from 'src/api/giphy'
 import SearchBar from 'src/components/common/search-bar.vue'
 import GifCard from 'src/components/common/gif-card.vue'
+import PageHeader from 'src/components/common/page-header.vue'
 
 const $q = useQuasar()
 const giphyApi = new GiphyApi()
 
-// Estado local
 const items = ref([])
 const searchQuery = ref('')
 const currentPage = ref(1)
@@ -55,7 +63,6 @@ const pagination = ref({
   offset: 0,
 })
 
-// Computed
 const totalPages = computed(() => {
   return Math.ceil(pagination.value.total_count / pageSize.value)
 })
@@ -64,7 +71,6 @@ onMounted(() => {
   fetchTrending()
 })
 
-// Métodos
 const fetchTrending = async () => {
   try {
     $q.loading.show({
