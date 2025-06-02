@@ -17,11 +17,11 @@ const routes = [
         name: 'favorites',
         component: () => import('pages/favorites/favorites-page.vue'),
       },
-      // {
-      //   path: 'categories',
-      //   name: 'categories',
-      //   component: () => import('pages/categories/categories-page.vue'),
-      // },
+      {
+        path: 'categories',
+        name: 'categories',
+        component: () => import('pages/categories/categories-page.vue'),
+      },
       {
         path: 'about',
         name: 'about',

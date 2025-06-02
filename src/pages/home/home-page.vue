@@ -37,11 +37,12 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useQuasar } from 'quasar'
-import { giphyApi } from 'src/api/giphy'
+import { GiphyApi } from 'src/api/giphy'
 import SearchBar from 'src/components/common/search-bar.vue'
 import GifCard from 'src/components/common/gif-card.vue'
 
 const $q = useQuasar()
+const giphyApi = new GiphyApi()
 
 // Estado local
 const items = ref([])

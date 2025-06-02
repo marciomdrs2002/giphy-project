@@ -85,7 +85,39 @@ export class GiphyApi extends BaseApi {
     })
     return response.data
   }
-}
 
-// Exporta uma instância única para ser usada em toda a aplicação
-export const giphyApi = new GiphyApi()
+  /**
+   * Busca as categorias disponíveis
+   * @returns {Promise} Promise com a lista de categorias
+   */
+  async getCategories() {
+    const response = await this.get('/categories', {
+      params: this._defaultParams,
+    })
+    return response.data
+  }
+
+  /**
+   * Busca GIFs por categoria
+   * @param {string} categoryName - Nome da categoria
+   * @param {number} page - Número da página
+   * @param {number} pageSize - Tamanho da página
+   * @returns {Promise} Promise com os resultados
+   */
+  async getByCategory(categoryName, page = 1, pageSize = 20) {
+    const offset = (page - 1) * pageSize
+    const response = await this.get(`/search`, {
+      params: {
+        ...this._defaultParams,
+        q: categoryName,
+        limit: pageSize,
+        offset,
+      },
+    })
+
+    return {
+      data: response.data,
+      pagination: response.pagination,
+    }
+  }
+}
