@@ -1,11 +1,13 @@
 import { BaseApi } from 'src/api/base/base-api'
 
+const GIPHY_API_KEY = process.env.GIPHY_API_KEY
+
 export class GiphyApi extends BaseApi {
   constructor() {
     super('https://api.giphy.com/v1/', 'gifs')
 
     this._defaultParams = {
-      api_key: process.env.GIPHY_API_KEY,
+      api_key: GIPHY_API_KEY,
       limit: 20,
       rating: 'g',
       lang: 'pt-BR',

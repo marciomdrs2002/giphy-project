@@ -24,18 +24,6 @@
       <q-btn flat round color="grey" icon="share" @click="handleShare">
         <q-tooltip>Compartilhar</q-tooltip>
       </q-btn>
-
-      <!-- Botão de remover (apenas na página de favoritos) -->
-      <q-btn
-        v-if="showRemoveButton"
-        flat
-        round
-        color="negative"
-        icon="delete"
-        @click="handleRemove"
-      >
-        <q-tooltip>Remover da lista</q-tooltip>
-      </q-btn>
     </q-card-actions>
   </q-card>
 </template>
@@ -111,27 +99,6 @@ const handleShare = async () => {
       icon: 'error',
     })
   }
-}
-
-const handleRemove = () => {
-  $q.dialog({
-    title: 'Remover dos favoritos',
-    message: `Deseja remover "${props.gif.title || 'este GIF'}" dos seus favoritos?`,
-    cancel: true,
-    persistent: true,
-  }).onOk(() => {
-    const removed = favoritesStore.removeFromFavorites(props.gif)
-    if (removed) {
-      $q.notify({
-        color: 'positive',
-        message: 'GIF removido dos favoritos',
-        icon: 'favorite_border',
-      })
-
-      // Emite evento para o componente pai
-      emit('remove-requested', props.gif)
-    }
-  })
 }
 </script>
 

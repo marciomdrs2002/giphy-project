@@ -1,17 +1,32 @@
-import homeRoutes from './modules/home'
-import favoritesRoutes from './modules/favorites'
-
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/main-layout.vue'),
     children: [
       {
         path: '',
         redirect: '/home',
       },
-      homeRoutes,
-      favoritesRoutes,
+      {
+        path: 'home',
+        name: 'home',
+        component: () => import('pages/home/home-page.vue'),
+      },
+      {
+        path: 'favorites',
+        name: 'favorites',
+        component: () => import('pages/favorites/favorites-page.vue'),
+      },
+      // {
+      //   path: 'categories',
+      //   name: 'categories',
+      //   component: () => import('pages/categories/categories-page.vue'),
+      // },
+      {
+        path: 'about',
+        name: 'about',
+        component: () => import('pages/about/about-page.vue'),
+      },
     ],
   },
 
@@ -19,7 +34,7 @@ const routes = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('pages/error/error-404.vue'),
   },
 ]
 

@@ -48,7 +48,7 @@ export default defineConfig((ctx) => {
       // publicPath: '/',
       // analyze: true,
       env: {
-        GIPHY_API_KEY: '8R0GnI7b9Ayg5ZNsLKbniKQfghUj3THX',
+        GIPHY_API_KEY: process.env.GIPHY_API_KEY,
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
