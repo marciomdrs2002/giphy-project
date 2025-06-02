@@ -25,7 +25,8 @@
             <li>Vue.js 3 com Composition API</li>
             <li>Quasar Framework para UI</li>
             <li>GIPHY API para dados dos GIFs</li>
-            <li>LocalStorage para persistência dos favoritos</li>
+            <li>Pinia para gerenciamento de estado</li>
+            <li>Axios para requisições HTTP</li>
           </ul>
 
           <q-separator class="q-my-lg" />

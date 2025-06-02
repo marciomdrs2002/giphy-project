@@ -1,6 +1,6 @@
 import { BaseApi } from 'src/api/base/base-api'
 
-const GIPHY_API_KEY = process.env.GIPHY_API_KEY
+const GIPHY_API_KEY = process.env.QUASAR_GIPHY_API_KEY
 
 export class GiphyApi extends BaseApi {
   constructor() {
@@ -10,7 +10,6 @@ export class GiphyApi extends BaseApi {
       api_key: GIPHY_API_KEY,
       limit: 20,
       rating: 'g',
-      lang: 'pt-BR',
     }
   }
 

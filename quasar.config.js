@@ -47,9 +47,10 @@ export default defineConfig((ctx) => {
 
       // publicPath: '/',
       // analyze: true,
-      env: {
-        GIPHY_API_KEY: process.env.GIPHY_API_KEY,
-      },
+      // Removendo configuração manual pois estamos usando prefixo QUASAR_
+      // env: {
+      //   GIPHY_API_KEY: process.env.GIPHY_API_KEY,
+      // },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
